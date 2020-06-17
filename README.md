@@ -8,7 +8,7 @@ This package has only been tested for sequelize v5, and only for the *mysql* dia
 
 ### Prerequisites
 When getting started make sure you are using **Aurora Serverless MySQL** and that the **Data API** is enabled.
-And that you cluster is configured to use secrets from **AWS Secrets Manager**
+And that your cluster is configured to use secrets from **AWS Secrets Manager**
 
 Install sequelize in project
 ```
@@ -23,7 +23,7 @@ Install Wrapper
 npm install @fyreware/mysql-data-api --save
 ```
 ### Usage
-When using the data api wrapper you will configure sequelize like normal with the exception of of certain fields that are *ignored*, or have been *hijacked* by the wrapper as shown below.
+When using the data api wrapper you will configure sequelize like normal with the exception of certain fields that are *ignored*, or have been *hijacked* by the wrapper as shown below.
 
 ``` javascript
 const database = 'testDb'
@@ -34,14 +34,14 @@ const host = 'arn:aws:rds:us-east-1:123456789000:cluster:http-endpoint-test';
 const username = 'anything'; 
 
 // Arn of secrets manager secret containing the rds credentials
-const passowrd = 'arn:aws:secretsmanager:region:123456789012:secret:tutorials/MyFirstTutorialSecret-jiObOV'
+const password = 'arn:aws:secretsmanager:region:123456789012:secret:tutorials/MyFirstTutorialSecret-jiObOV'
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: 'mysql'
+  dialect: 'mysql',
 
   // This tells sequelize to load our module instead of the `mysql2` module
-  dialectModulePath: '@fyreware/mysql-data-api',
+  dialectModulePath: '@fyreware/mysql-data-api'
 });
 ```
 
